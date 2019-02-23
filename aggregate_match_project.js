@@ -4,6 +4,9 @@ var value = db.employees.aggregate(
 		"$match":{"team":"Orange"}
 	},
 	{
+		"$sort":{"first_name":1}
+	},
+	{
 		"$limit":5
 	},
 	{
