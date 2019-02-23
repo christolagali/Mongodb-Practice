@@ -1,6 +1,7 @@
 var value = db.employees.aggregate([
-	{"$match":{"team":"Orange"}},
+	{"$match":{"team":"Orange","first_name":"Cheryl","last_name":"Garcia"}},
 	{"$limit":10},
+	{"$unwind":"$acl"},
 	{"$project":{
 		"employee_id":1,
 		"_id":0,
