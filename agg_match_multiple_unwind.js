@@ -4,5 +4,6 @@ var value = db.movies.aggregate([
 	{"$match":{"$or":[{"genres":"Drama"},{"genres":"Crime"}]}},
 	{"$project":{"_id":0,"title":1,"genres":1,"cast":1}},
 	{"$unwind":"$cast"},
-	{"$match":{"$or":[{"cast":"Edmund Breon "},{"cast":"Georges Melchior"}]}}
+	{"$match":{"$or":[{"cast":"Edmund Breon "},{"cast":"Georges Melchior"}]}},
+	{"$group":{"_id":"$title","movie_cast":{"$push":"$cast"}}}
 ]);
