@@ -1,0 +1,30 @@
+var value = db.movies.aggregate([
+	{"$match":{"year":1913}},
+	{"$project":{
+		"_id":0,
+		"cast":{"$filter":
+			{
+			"input":"$cast",
+			"as":"array",
+			"cond":{"$and":[{"cast":"Edmund Breon"},{"cast":"Georges Melchior"}]}
+			}
+		},
+		"title":1,
+		"genres":1
+		}
+	},
+	{
+		"$project":{
+			"_id":0,
+			"cast":1,
+			"title":1,
+			"genres":{
+				"$filter":{
+					"input":"$genres",
+					"as":"array",
+					"cond":{"$and":[{"genres":"Crime"},{"genres":"Drama"}]}
+				}
+			}
+		}
+	}
+])
